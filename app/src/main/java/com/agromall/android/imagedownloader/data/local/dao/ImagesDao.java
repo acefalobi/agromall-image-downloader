@@ -1,5 +1,6 @@
 package com.agromall.android.imagedownloader.data.local.dao;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -14,10 +15,7 @@ import java.util.List;
 public interface ImagesDao {
 
     @Query("SELECT * FROM images")
-    List<Image> getImages();
-
-    @Query("SELECT * FROM images WHERE imageId = :imageId")
-    Image getImage(String imageId);
+    LiveData<List<Image>> getImages();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertImage(Image image);
